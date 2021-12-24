@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\project;
 use Illuminate\Http\Request;
 
+use DB;
+
 class ProjectController extends Controller
 {
     /**
@@ -15,7 +17,7 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = project::latest('ID')->paginate(10);
-        return view('projects.index', compact('projects'))->with('i', (request()->input('page', 1) - 1) * 5);
+        return view('projects.index', compact('projects'))->with('i', (request()->input('page', 1) - 1) * 10);
     }
 
     /**
@@ -66,6 +68,17 @@ class ProjectController extends Controller
      */
     public function edit(project $project)
     {
+		$changes = $project->getChanges();
+		$msg = "A given project has changed with these parameters: " . json_encode($changes);
+        $msg = wordwrap($msg, 70);
+
+        $str = $project->contacts;
+        $arrayOfContactIDs = explode(',', $str);
+		foreach($arrayOfContactIDs as $givenContactID) {
+            $emailAddress = DB::table('contact')->select('email')->where('ID', $givenContactID)->get()->first()->email;
+		    // mail($emailAddress, "project has changed", $msg); // TODO set SMTP-server
+		}
+
         return view('projects.edit', compact('project'));
     }
 

@@ -4,8 +4,6 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Csiga Project Handler (Fogarasi Gergő)</h2>
-                <img src="{{URL::asset('/image/logo.jpg')}}" alt="Csiga Project Handler - Logo" height="200" width="200">
             </div>
             <div class="pull-right">
                 <a class="btn btn-success" href="{{ route('contacts.create') }}"> Create New Contact</a>
@@ -21,14 +19,14 @@
 
     <table class="table table-bordered">
         <tr>
-            <th>No</th>
+            <th>ID</th>
             <th>Name</th>
             <th>E-mail</th>
             <th width="280px">Action</th>
         </tr>
         @foreach ($contacts as $contact)
         <tr>
-            <td>{{ ++$i }}</td>
+            <td>{{ $contact->ID }}</td>
             <td>{{ $contact->name }}</td>
             <td>{{ $contact->email }}</td>
             <td>

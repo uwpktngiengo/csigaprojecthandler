@@ -15,7 +15,7 @@ class ContactController extends Controller
     public function index()
     {
         $contacts = contact::latest('ID')->paginate(10);
-        return view('contacts.index', compact('contacts'))->with('i', (request()->input('page', 1) - 1) * 5);
+        return view('contacts.index', compact('contacts'))->with('i', (request()->input('page', 1) - 1) * 10);
     }
 
     /**
@@ -38,7 +38,7 @@ class ContactController extends Controller
     {
         $request->validate([
             'name' => 'required',
-			'email' => 'required'
+			'email' => 'required|email'
         ]);
 
         contact::create($request->all());
@@ -79,7 +79,7 @@ class ContactController extends Controller
     {
         $request->validate([
             'name' => 'required',
-			'email' => 'required'
+			'email' => 'required|email'
         ]);
         $contact->update($request->all());
         return redirect()->route('contacts.index')->with('success', 'Contact updated successfully');

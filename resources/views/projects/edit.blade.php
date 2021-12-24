@@ -55,4 +55,7 @@
             </div>
         </div>
     </form>
+
+<iframe style="width: 100%;" src="{{url('contacts')}}">Your browser isn't compatible.</iframe>
+
 @endsection

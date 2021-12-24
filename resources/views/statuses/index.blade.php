@@ -21,13 +21,13 @@
 
     <table class="table table-bordered">
         <tr>
-            <th>No</th>
+            <th>ID</th>
             <th>Description</th>
             <th width="280px">Action</th>
         </tr>
         @foreach ($statuses as $status)
         <tr>
-            <td>{{ ++$i }}</td>
+            <td>{{ $status->ID }}</td>
             <td>{{ $status->description }}</td>
             <td>
                 <form action="{{ route('statuses.destroy', $status->ID) }}" method="POST">

@@ -15,7 +15,7 @@ class StatusController extends Controller
     public function index()
     {
         $statuses = status::latest('ID')->paginate(10);
-        return view('statuses.index', compact('statuses'))->with('i', (request()->input('page', 1) - 1) * 5);
+        return view('statuses.index', compact('statuses'))->with('i', (request()->input('page', 1) - 1) * 10);
     }
 
     /**
